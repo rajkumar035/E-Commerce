@@ -1,13 +1,9 @@
 import { Maincontainer } from '../Components/Maincontainer';
-import { Navbar } from '../Components/Navbar';
 import { ProductsSHow } from '../Components/ProductsSHow';
 
-const HomePage = ({ Data }) => {
-  console.log('hello');
-  console.log(Data);
+const HomePage = () => {
   return (
     <>
-      <Navbar />
       <ProductsSHow />
       <Maincontainer />
     </>
