@@ -1,20 +1,13 @@
-import {
-  Box,
-  Link,
-  Stack,
-  Typography,
-  FormControl,
-  Input,
-  InputAdornment,
-} from '@mui/material';
-import { AiOutlineSearch } from 'react-icons/ai';
+import React from 'react'
+import {Box, Link, Stack, Typography, FormControl, Input, InputAdornment} from '@mui/material';
+import {AiOutlineSearch} from 'react-icons/ai';
 
-export const ProductsSHow = () => {
-  const links = {
-    textDecoration: 'none',
-    borderBottom: '1px dotted #bdbdbd',
-    color: '#bdbdbd',
-  };
+const ProductsSearch = () => {
+    const links = {
+      textDecoration: 'none',
+      borderBottom: '1px dotted #bdbdbd',
+      color: '#bdbdbd',
+    };
   return (
     <>
       <Box
@@ -23,7 +16,7 @@ export const ProductsSHow = () => {
             sm: '12% 3% 1% 3%',
             md: '8% 3% 1% 3%',
             lg: '6% 18% 1% 18%',
-            xl: '4.5% 18% 1% 18%',
+            xl: '6% 18% 1% 18%',
           },
         }}
         bgcolor='#212121'>
@@ -47,12 +40,10 @@ export const ProductsSHow = () => {
             }
           />
         </FormControl>
-        <Stack
-          spacing={1}
-          direction='row'
-          alignItems='center'
-          paddingTop='min(1%)'>
-          <Typography color='GrayText'>Popular:</Typography>
+        <Stack spacing={1} direction='row' alignItems='center' paddingTop='min(1%)' fontSize='12px'>
+          <Typography color='GrayText' fontSize='14px'>
+            Popular:
+          </Typography>
           <Link style={links} href='#'>
             checkout
           </Link>
@@ -69,4 +60,6 @@ export const ProductsSHow = () => {
       </Box>
     </>
   );
-};
+}
+
+export default ProductsSearch
