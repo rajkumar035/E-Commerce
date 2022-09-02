@@ -2,12 +2,12 @@ import React from 'react'
 import {Box, Link, Stack, Typography, FormControl, Input, InputAdornment} from '@mui/material';
 import {AiOutlineSearch} from 'react-icons/ai';
 
-const ProductsSearch = () => {
-    const links = {
-      textDecoration: 'none',
-      borderBottom: '1px dotted #bdbdbd',
-      color: '#bdbdbd',
-    };
+const ProductsSearch = ({Searchfunc}) => {
+  const links = {
+    textDecoration: 'none',
+    borderBottom: '1px dotted #bdbdbd',
+    color: '#bdbdbd',
+  };
   return (
     <>
       <Box
@@ -28,6 +28,7 @@ const ProductsSearch = () => {
             borderRadius: '8px',
           }}>
           <Input
+            onChange={Searchfunc}
             sx={{
               height: '50px',
               padding: '0px 20px',
@@ -60,6 +61,6 @@ const ProductsSearch = () => {
       </Box>
     </>
   );
-}
+};
 
 export default ProductsSearch

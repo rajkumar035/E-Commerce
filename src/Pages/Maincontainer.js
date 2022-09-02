@@ -1,9 +1,9 @@
-import {Box, Grid, Link, Stack, Typography} from '@mui/material';
-import {Data} from '../Data';
+import {Grid, Link, Stack, Typography} from '@mui/material';
 import ContCards from '../Components/ContCards';
 import {useNavigate} from 'react-router-dom';
+import { Data } from '../Data';
 
-const Maincontainer = () => {
+const Maincontainer = ({data}) => {
   const navigate = useNavigate();
   const Paths = {
     textDecoration: 'none',
@@ -76,7 +76,7 @@ const Maincontainer = () => {
               You have over 45 eCommerce site designs to choose from. All eCommerce website themes are 100% mobile-friendly, fully customizable, affordable, and 100% open source. Use the dropdowns below to find the perfect theme for your online store.
             </Typography>
             <Grid container gap={2} justifyContent='center'>
-              {Data.Contents.map((items, key) => (
+              {data.map((items, key) => (
                 <Link
                   sx={{textDecoration: 'none'}}
                   onClick={() => {
