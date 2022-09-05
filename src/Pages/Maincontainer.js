@@ -1,38 +1,22 @@
-import {Grid, Link, Stack, Typography} from '@mui/material';
+import {Grid, Link, Stack, Typography, Input} from '@mui/material';
 import ContCards from '../Components/ContCards';
 import {useNavigate} from 'react-router-dom';
-import { Data } from '../Data';
+import {Data} from '../Data';
 
-const Maincontainer = ({data}) => {
+const Maincontainer = ({data, Pricefilter, Versionfilter, Categoryfilter}) => {
   const navigate = useNavigate();
   const Paths = {
-    textDecoration: 'none',
     color: 'rgba(0, 0, 0, 0.8)',
     margin: '4px 0px',
     cursor: 'pointer',
     fontSize: '14px',
+    background: '#FFF',
+    border: '0px 0px 0px 0px',
   };
   const navLine = {
     margin: '2px 0px',
     borderColor: 'GrayText',
   };
-
-  // const handlesort = (e) => {
-  //   var filteredvals = parseInt(e.target.value);
-  //   console.log(filteredvals);
-  //   var position = filterarr.indexOf(filteredvals);
-
-  //   if (e.target.checked) {
-  //     filterarr.splice(position, 1);
-  //     console.log(filterarr);
-  //   } else {
-  //     if (!filterarr.includes(filteredvals)) {
-  //       filterarr.push(parseInt(e.target.value));
-  //       console.log(filterarr);
-  //     }
-  //   }
-  // };
-
   return (
     <>
       <Grid
@@ -48,22 +32,18 @@ const Maincontainer = ({data}) => {
         }}>
         <Grid item xl={2}>
           <Stack direction='column'>
-            {Data.Free$Paid.map((freeitems) => (
-              <Link style={Paths}>{freeitems}</Link>
-            ))}
-            <hr style={navLine} />
             <Typography fontWeight='600' fontSize='15px' margin='10px 0px' color='rgba(0, 0, 0, 0.8)'>
               Compatible
             </Typography>
             {Data.Compatible.map((compatitem) => (
-              <Link style={Paths}>{compatitem}</Link>
+              <Input type='text' style={Paths} value={compatitem} onClick={Versionfilter} readOnly />
             ))}
             <hr style={navLine} />
             <Typography fontWeight='600' fontSize='15px' margin='10px 0px' color='rgba(0, 0, 0, 0.8)'>
               Categories
             </Typography>
             {Data.Categories.map((items) => (
-              <Link style={Paths}>{items}</Link>
+              <Input type='text' value={items} style={Paths} onClick={Categoryfilter} readOnly />
             ))}
           </Stack>
         </Grid>
@@ -87,6 +67,7 @@ const Maincontainer = ({data}) => {
                         Rate: items.price,
                         MainImg: items.MainImg,
                         Logo: items.LogoImg,
+                        Version: items.versions,
                       },
                     });
                   }}>

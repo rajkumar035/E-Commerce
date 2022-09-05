@@ -63,7 +63,7 @@ const ProductDef = () => {
                 <Typography fontSize='14px' fontWeight='600'>
                   Compatible:
                 </Typography>
-                <Typography fontSize='15px'>5.3.3.x - 5.4.1.x</Typography>
+                <Typography fontSize='15px'>x {location.state.Version}</Typography>
               </Box>
               <Typography fontSize='15px'>Dont see your version ?</Typography>
               <Link fontSize='15px'>Contact us</Link>

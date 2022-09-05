@@ -8,7 +8,12 @@ import ProductsSearch from './Components/ProductsSearch';
 
 function App() {
   const [search, setsearch] = useState('');
-  console.log(search);
+  const [price, selectedprice] = useState('');
+  const [version, selectedversion] = useState('');
+  const [category, selectedcategory] = useState('');
+  console.log(price);
+  console.log(version);
+  console.log(category);
   return (
     <div className='App'>
       <Navbar />
@@ -22,11 +27,23 @@ function App() {
           path='/Home'
           element={
             <Maincontainer
+              Pricefilter={(event) => {
+                selectedprice(event.target.value);
+              }}
+              Versionfilter={(event) => {
+                selectedversion(event.target.value);
+              }}
+              Categoryfilter={(event) => {
+                selectedcategory(event.target.value);
+              }}
               data={Data.Contents.filter((vals) => {
-                if (search === '') {
-                  return vals;
-                } else if (search !== '') {
+                if (search !== '') {
+                  console.log(vals.categorie);
                   return search.includes(vals.head.toLowerCase());
+                } else if (vals.versions.includes(version)) {
+                  return version.includes(vals.versions);
+                } else if (vals.categorie.includes(category)) {
+                  return category.includes(vals.categorie);
                 } else {
                   console.log('Oops...!');
                 }
