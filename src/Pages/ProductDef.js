@@ -1,15 +1,20 @@
-import {Stack, Box, Button, Tab, Card, Link, Typography} from '@mui/material';
+import {Stack, Box, Button, Tab, Card, Link, Typography, Rating} from '@mui/material';
 import React, {useState} from 'react';
 import {TabContext, TabList, TabPanel} from '@mui/lab';
 import {useLocation} from 'react-router-dom';
 
 const ProductDef = () => {
-  const location = useLocation();
   const navLine = {
     margin: '0px 0px',
     borderColor: 'GrayText',
     opacity: '40%',
   };
+  const navLine2 = {
+    margin: '25px 0px',
+    borderColor: 'GrayText',
+    color: 'GrayText',
+  };
+  const location = useLocation();
   const [value, setValue] = useState('1');
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -105,7 +110,27 @@ const ProductDef = () => {
             </TabList>
           </Box>
           <TabPanel value='1'>{location.state.Desc}</TabPanel>
-          <TabPanel value='2'>Review</TabPanel>
+          <TabPanel value='2'>
+            <Box>
+              {location.state.Customer.map((x) => {
+                return (
+                  <Stack>
+                    <hr style={navLine2} />
+                    <Typography fontSize={16} fontWeight={600}>
+                      {x.Name}
+                    </Typography>
+                    <Typography fontSize={12} fontWeight={100} marginBottom='25px'>
+                      {x.Date}
+                    </Typography>
+                    <Rating value={x.Rating} readOnly />
+                    <Typography fontSize={18} fontWeight={500} margin='25px 0px'>
+                      {x.Message}
+                    </Typography>
+                  </Stack>
+                );
+              })}
+            </Box>
+          </TabPanel>
         </TabContext>
       </Box>
     </>

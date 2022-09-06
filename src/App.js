@@ -5,6 +5,7 @@ import ProductDef from './Pages/ProductDef';
 import {Navbar} from './Components/Navbar';
 import {Data} from './Data';
 import ProductsSearch from './Components/ProductsSearch';
+import Contacts from './Components/Contacts';
 
 function App() {
   const [search, setsearch] = useState('');
@@ -53,6 +54,7 @@ function App() {
         />
         <Route path='/Products' element={<ProductDef />} />
       </Routes>
+      <Contacts/>
     </div>
   );
 }

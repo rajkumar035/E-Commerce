@@ -3,7 +3,7 @@ import ContCards from '../Components/ContCards';
 import {useNavigate} from 'react-router-dom';
 import {Data} from '../Data';
 
-const Maincontainer = ({data, Pricefilter, Versionfilter, Categoryfilter}) => {
+const Maincontainer = ({data, Versionfilter, Categoryfilter}) => {
   const navigate = useNavigate();
   const Paths = {
     color: 'rgba(0, 0, 0, 0.8)',
@@ -68,6 +68,7 @@ const Maincontainer = ({data, Pricefilter, Versionfilter, Categoryfilter}) => {
                         MainImg: items.MainImg,
                         Logo: items.LogoImg,
                         Version: items.versions,
+                        Customer: items.Customers,
                       },
                     });
                   }}>

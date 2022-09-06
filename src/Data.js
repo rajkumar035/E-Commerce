@@ -2,6 +2,29 @@ export const Data = {
   Free$Paid: ['Free & Paid', 'Free', 'Paid', 'Sale'],
   Compatible: ['All versions', '5.4', '5.0 - 5.3', '4.5 - 4.9', '4.0 - 4.4'],
   Categories: ['All Categories', 'Apparel & Clothing', 'Art & Photography', 'Books', 'Buisness', 'Cars', 'Computer', 'Crafts and hobbies', 'Education', 'Electronics', 'Entertainment', 'Equipment and Tools', 'Fitness', 'Flower', 'Food & Drink', 'Furniture & Interior', 'Gifts', 'Health & Beauty', 'Industrial', 'Jewelry & Accessories'],
+  Contacts: [
+    {
+      Extras: ['Apps', 'Themes', 'CloudSearch & Filters', 'X-Payment'],
+      Support: ['24x7 Support', 'Knowledge Base', 'API Documentation', 'Terms of Service'],
+      Compare: ['Move to X-Cart', 'Adobe Commerce powered by Magneto', 'Shopify Plus', 'Web Shop Manager', 'X-Cart 4 vs X-Cart 5'],
+      Resources: ['Custom eCommerce Solution', 'Complex Search - High SKUs', 'Guide: Starting an eCommerce Buisness', 'Guide: eCommerce Replatforming', 'Guide: How to sell online', 'Case Studies', 'Industry Partners'],
+      XCart: ['About Us', 'Contact Us', 'Join Us', 'Brand Asset'],
+      LatestonBlog: [
+        {
+          Date: 'July 25, 2022',
+          Question: 'How to Prevent Cyber-Attacks on Your eCommerce Website: 8 Top Threats & Hot Tips to Grasp',
+        },
+        {
+          Date: 'July 30, 2022',
+          Question: 'An In-Depth Online Seller’s Guide to eCommerce Inflation: 7 Ways to Protect Your Profits',
+        },
+        {
+          Date: 'July 06, 2022',
+          Question: 'How Does PayPal Pay Later Work For Online Sellers? 7 Benefits of Adopting PayPal Loans',
+        },
+      ],
+    },
+  ],
   Contents: [
     {
       img: 'https://market.x-cart.com/var/images/template_images/286.418/Skins_list_image_632x924_8_7.jpg',
@@ -14,6 +37,14 @@ export const Data = {
         "The Kitchen Supplies Store design template is good for stores selling accessories, kitchen supplies & furniture. It's bright and looks stylish and professional due to red and black colors combination. Clear fully responsive layout and convenient navigation, cloud zoom effect for product images and detailed images in pop-ups ensure best shopping experience for your store visitors. The template offers different options for your promotions, such as big banners on the top and on the bottom of the homepage and additional informational blocks in the footer. The template is SEO friendly and compatible with all popular browsers.",
       categorie: 'Fitness',
       versions: '5.0 - 5.3',
+      Customers: [
+        {
+          Name: 'Matthew',
+          Rating: '4',
+          Date: 'Mar 2, 2022, 21:07',
+          Message: 'Good theme, thank you !',
+        },
+      ],
     },
     {
       img: 'https://market.x-cart.com/var/images/template_images/286.418/Skins_list_image_632x924_5_1.jpg',
@@ -26,6 +57,20 @@ export const Data = {
         'This bright high-contrast skin with modern straight cornered flat design will become a good fit for stores selling fireworks and car accessories. A 100% wide homepage slideshow, custom subcategory blocks, a semi-transparent top bar and a top-aligned placeholder for category banners will attract your store visitors’ attention. Inset featured products, new arrivals, bestsellers product tabs will ergonomically fit your store pages. This template is fully-adapted to mobile devices, SEO-friendly and looks great in all popular browsers.',
       categorie: 'Entertainment',
       versions: '5.4',
+      Customers: [
+        {
+          Name: 'Matthew',
+          Rating: '5',
+          Date: 'Mar 2, 2022, 21:07',
+          Message: 'Good theme, thank you !',
+        },
+        {
+          Name: 'David',
+          Rating: '6',
+          Date: 'Mar 2, 2022, 21:07',
+          Message: 'Good theme, thank you !',
+        },
+      ],
     },
     {
       img: 'https://market.x-cart.com/var/images/template_images/286.418/MG_listing_286h418_2h.jpg',
@@ -37,6 +82,14 @@ export const Data = {
       Description: 'The light gray background and bright-colored key elements in this theme will focus your audience on the most important parts. This template is suitable for fashion & beauty stores, household goods, electronics, and sport. This template is 100% mobile ready, SEO optimized, and looks great in all popular browsers.',
       categorie: 'Apparel & Clothing',
       versions: '5.0 - 5.3',
+      Customers: [
+        {
+          Name: 'Matthew',
+          Rating: '3',
+          Date: 'Mar 2, 2022, 21:07',
+          Message: 'Good theme, thank you !',
+        },
+      ],
     },
     {
       img: 'https://market.x-cart.com/var/images/template_images/286.418/Template_51_Ultimate_skin.jpg',
@@ -49,6 +102,14 @@ export const Data = {
         'The template designed in aegean and sky blue shades looks light and neat. Due to its simple clean design it can be used for various stores: accessories, clothing, fashion, jewelry, sport, wedding. Your store will look perfect on any device due to responsive full-width design. Built-in tools such as flyout menus and product carousel enhance navigation and make presentation of your products more attractive for your store visitors. It’s SEO friendly and optimized for all popular browsers.',
       categorie: 'Fitness',
       versions: '5.4',
+      Customers: [
+        {
+          Name: '',
+          Rating: '',
+          Date: '',
+          Message: '',
+        },
+      ],
     },
     {
       img: 'https://market.x-cart.com/var/images/template_images/286.418/Template_43_Alternative_Clothes.jpg',
@@ -61,6 +122,14 @@ export const Data = {
         'If you are looking to build mysterious and extraordinary atmosphere in your store, consider this template in dark colors. It’s a perfect fit for stores selling unusual youth clothes, jewelry, accessories, and it will also work for music and watches. Your customers will appreciate convenience in navigation provided by this template and will come back to your store over and over again. Featured products, bestsellers, products on sale, new arrivals, etc are beautifully presented in carousels on the home page. Those who want to use X-Cart Banner system add-on will be glad to find out that the its design has been adapted to look nice with this template.',
       categorie: 'Apparel & Clothing',
       versions: '5.4',
+      Customers: [
+        {
+          Name: '',
+          Rating: '',
+          Date: '',
+          Message: '',
+        },
+      ],
     },
     {
       img: 'https://market.x-cart.com/var/images/template_images/286.418/Template_45_Intimates.jpg',
@@ -73,6 +142,14 @@ export const Data = {
         "This stylish theme with tender pink accents has been developed for Fashion, Clothes, Jewelry and Design stores. The template is SEO friendly, compatible with all popular browsers and mobile ready, it will look great on any screen. Big full-width banner in the top and additional banners in the bottom will grab your store visitors attention to your promotions and offers. Products on sale, featured products, new arrivals and bestsellers are beautifully presented in built-in carousels. The template comes with dropdown categories menu, one of the category featured products is displayed in this drop-down next to subcategories list. Products in minicart widget are shown in blocks with product name, price and image, and customers can remove products right from there which makes cart management more convenient for them. With adapted news on the homepage you can be confident that all your latest records won't go unnoticed.",
       categorie: 'Apparel & Clothing',
       versions: '4.5 - 4.9',
+      Customers: [
+        {
+          Name: '',
+          Rating: '',
+          Date: '',
+          Message: '',
+        },
+      ],
     },
     {
       img: 'https://market.x-cart.com/var/images/template_images/286.418/Template_48_Graphic_Stock_1.jpg',
@@ -84,6 +161,14 @@ export const Data = {
       Description: "The development of this add-on has been discontinued. It means that you can use it as is, but there will be no new features, bug-fixes, support of newer versions, etc. If you need this add-on to be adapted for your version of X-Cart, contact us at https://www.x-cart.com/custom-development.html. The 'Graphic Stock' X-Cart Design Template (#48). This template is good for the following themes: Graphics, cars, books, accessories, equipment",
       categorie: 'Art & Photography',
       versions: '4.0 - 4.4',
+      Customers: [
+        {
+          Name: '',
+          Rating: '',
+          Date: '',
+          Message: '',
+        },
+      ],
     },
     {
       img: 'https://market.x-cart.com/var/images/template_images/286.418/Template_37_Apple_Shop.jpg',
@@ -95,6 +180,14 @@ export const Data = {
       Description: 'Are you going to sell computers, electronics, tools & equipment or business products? Then this template is right for you. It will bring contemporary and stylish look to your store due to clean ultrawhite design. Well thought layout ensures convenient navigation for your customers. Bestsellers are promoted right on the homepage and are beautifully presented in carousels.',
       categorie: 'Computer',
       versions: '4.5 - 4.9',
+      Customers: [
+        {
+          Name: '',
+          Rating: '',
+          Date: '',
+          Message: '',
+        },
+      ],
     },
     {
       img: 'https://market.x-cart.com/var/images/template_images/286.418/Skins_list_image_632x924_8_8.jpg',
@@ -107,6 +200,14 @@ export const Data = {
         'Make yourself at home! A bluish palette of the template renders the feel of peace and relaxation. Thus, the theme perfectly suits to create the atmosphere of comfort and home. We recommend using the theme for the bed linen goods and related items. The extensive top menu with the fixed position on scrolling and enlarged product images help to find a desired product in the catalog easily. The theme also provides information blocks with animated illustrations for the home page. Feel free to announce the sale running in the store or new collection arrived. This theme is fully responsive so it looks perfect on any device with any screen size the user has in hand while shopping.',
       categorie: 'Apparel & Clothing',
       versions: '4.0 - 4.4',
+      Customers: [
+        {
+          Name: '',
+          Rating: '',
+          Date: '',
+          Message: '',
+        },
+      ],
     },
   ],
 };
