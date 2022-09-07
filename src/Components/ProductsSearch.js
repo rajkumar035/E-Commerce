@@ -1,22 +1,17 @@
-import React from 'react'
-import {Box, Link, Stack, Typography, FormControl, Input, InputAdornment} from '@mui/material';
+import React from 'react';
+import {Box, FormControl, Input, InputAdornment} from '@mui/material';
 import {AiOutlineSearch} from 'react-icons/ai';
 
 const ProductsSearch = ({Searchfunc}) => {
-  const links = {
-    textDecoration: 'none',
-    borderBottom: '1px dotted #bdbdbd',
-    color: '#bdbdbd',
-  };
   return (
     <>
       <Box
         sx={{
           padding: {
-            sm: '12% 3% 1% 3%',
-            md: '8% 3% 1% 3%',
-            lg: '6% 18% 1% 18%',
-            xl: '6% 18% 1% 18%',
+            sm: '12% 3% 2% 3%',
+            md: '8% 3% 2% 3%',
+            lg: '6% 18% 2% 18%',
+            xl: '6% 18% 2% 18%',
           },
         }}
         bgcolor='#212121'>
@@ -41,26 +36,9 @@ const ProductsSearch = ({Searchfunc}) => {
             }
           />
         </FormControl>
-        <Stack spacing={1} direction='row' alignItems='center' paddingTop='min(1%)' fontSize='12px'>
-          <Typography color='GrayText' fontSize='14px'>
-            Popular:
-          </Typography>
-          <Link style={links} href='#'>
-            checkout
-          </Link>
-          <Link style={links} href='#'>
-            orders
-          </Link>
-          <Link style={links} href='#'>
-            marketing
-          </Link>
-          <Link style={links} href='#'>
-            seo
-          </Link>
-        </Stack>
       </Box>
     </>
   );
 };
 
-export default ProductsSearch
+export default ProductsSearch;

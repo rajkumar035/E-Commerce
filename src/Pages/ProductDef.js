@@ -113,21 +113,29 @@ const ProductDef = () => {
           <TabPanel value='2'>
             <Box>
               {location.state.Customer.map((x) => {
-                return (
-                  <Stack>
-                    <hr style={navLine2} />
-                    <Typography fontSize={16} fontWeight={600}>
-                      {x.Name}
-                    </Typography>
-                    <Typography fontSize={12} fontWeight={100} marginBottom='25px'>
-                      {x.Date}
-                    </Typography>
-                    <Rating value={x.Rating} readOnly />
-                    <Typography fontSize={18} fontWeight={500} margin='25px 0px'>
-                      {x.Message}
-                    </Typography>
-                  </Stack>
-                );
+                if (x === 0) {
+                  return (
+                    <Stack>
+                      <Typography>No reviews</Typography>
+                    </Stack>
+                  );
+                } else {
+                  return (
+                    <Stack>
+                      <hr style={navLine2} />
+                      <Typography fontSize={16} fontWeight={600}>
+                        {x.Name}
+                      </Typography>
+                      <Typography fontSize={12} fontWeight={100} marginBottom='25px'>
+                        {x.Date}
+                      </Typography>
+                      <Rating value={x.Rating} readOnly />
+                      <Typography fontSize={18} fontWeight={500} margin='25px 0px'>
+                        {x.Message}
+                      </Typography>
+                    </Stack>
+                  );
+                }
               })}
             </Box>
           </TabPanel>

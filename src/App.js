@@ -9,10 +9,8 @@ import Contacts from './Components/Contacts';
 
 function App() {
   const [search, setsearch] = useState('');
-  const [price, selectedprice] = useState('');
   const [version, selectedversion] = useState('');
   const [category, selectedcategory] = useState('');
-  console.log(price);
   console.log(version);
   console.log(category);
   return (
@@ -28,9 +26,6 @@ function App() {
           path='/Home'
           element={
             <Maincontainer
-              Pricefilter={(event) => {
-                selectedprice(event.target.value);
-              }}
               Versionfilter={(event) => {
                 selectedversion(event.target.value);
               }}

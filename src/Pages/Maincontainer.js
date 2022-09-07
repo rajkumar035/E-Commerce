@@ -1,4 +1,4 @@
-import {Grid, Link, Stack, Typography, Input} from '@mui/material';
+import {Grid, Link, Stack, Typography} from '@mui/material';
 import ContCards from '../Components/ContCards';
 import {useNavigate} from 'react-router-dom';
 import {Data} from '../Data';
@@ -6,12 +6,14 @@ import {Data} from '../Data';
 const Maincontainer = ({data, Versionfilter, Categoryfilter}) => {
   const navigate = useNavigate();
   const Paths = {
-    color: 'rgba(0, 0, 0, 0.8)',
-    margin: '4px 0px',
+    color: 'rgba(0, 0, 0, 0.9)',
+    margin: '5% 0%',
     cursor: 'pointer',
-    fontSize: '14px',
+    fontSize: '88%',
     background: '#FFF',
     border: '0px 0px 0px 0px',
+    borderColor: '#fff',
+    borderStyle: 'none',
   };
   const navLine = {
     margin: '2px 0px',
@@ -32,18 +34,18 @@ const Maincontainer = ({data, Versionfilter, Categoryfilter}) => {
         }}>
         <Grid item xl={2}>
           <Stack direction='column'>
-            <Typography fontWeight='600' fontSize='15px' margin='10px 0px' color='rgba(0, 0, 0, 0.8)'>
+            <Typography fontWeight='600' fontSize='100%' margin='10px 0px' color='rgba(0, 0, 0, 0.8)'>
               Compatible
             </Typography>
             {Data.Compatible.map((compatitem) => (
-              <Input type='text' style={Paths} value={compatitem} onClick={Versionfilter} readOnly />
+              <input type="text" style={Paths} value={compatitem} onClick={Versionfilter} readOnly/>
             ))}
             <hr style={navLine} />
-            <Typography fontWeight='600' fontSize='15px' margin='10px 0px' color='rgba(0, 0, 0, 0.8)'>
+            <Typography fontWeight='600' fontSize='100%' margin='10px 0px' color='rgba(0, 0, 0, 0.8)'>
               Categories
             </Typography>
             {Data.Categories.map((items) => (
-              <Input type='text' value={items} style={Paths} onClick={Categoryfilter} readOnly />
+              <input type='text' value={items} style={Paths} onClick={Categoryfilter} readOnly />
             ))}
           </Stack>
         </Grid>

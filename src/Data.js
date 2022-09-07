@@ -31,7 +31,7 @@ export const Data = {
       MainImg: 'https://market.x-cart.com/var/images/product/680.580/Skin_details_image_1360x1160px_3_8.jpg',
       LogoImg: 'https://market.x-cart.com/var/images/module_icons/120.60/icon_188.png',
       head: 'Kitchen Supplies Store',
-      price: 'undefiend',
+      price: '139.00',
       Link: 'https://market.x-cart.com/ecommerce-templates/kitchen-supplies-store.html?backURL=https%3A%2F%2Fmarket.x-cart.com%2Fecommerce-templates%2F%23productid-4696',
       Description:
         "The Kitchen Supplies Store design template is good for stores selling accessories, kitchen supplies & furniture. It's bright and looks stylish and professional due to red and black colors combination. Clear fully responsive layout and convenient navigation, cloud zoom effect for product images and detailed images in pop-ups ensure best shopping experience for your store visitors. The template offers different options for your promotions, such as big banners on the top and on the bottom of the homepage and additional informational blocks in the footer. The template is SEO friendly and compatible with all popular browsers.",
@@ -51,7 +51,7 @@ export const Data = {
       MainImg: 'https://market.x-cart.com/var/images/product/680.580/Skin_details_image_1360x1160px_3.jpg',
       LogoImg: 'https://market.x-cart.com/var/images/module_icons/120.60/iconAlt_294.png',
       head: 'Fireworks',
-      price: 'undefiend',
+      price: 'Free',
       Link: 'https://market.x-cart.com/ecommerce-templates/fireworks.html?backURL=https%3A%2F%2Fmarket.x-cart.com%2Fecommerce-templates%2F%23productid-4550',
       Description:
         'This bright high-contrast skin with modern straight cornered flat design will become a good fit for stores selling fireworks and car accessories. A 100% wide homepage slideshow, custom subcategory blocks, a semi-transparent top bar and a top-aligned placeholder for category banners will attract your store visitors’ attention. Inset featured products, new arrivals, bestsellers product tabs will ergonomically fit your store pages. This template is fully-adapted to mobile devices, SEO-friendly and looks great in all popular browsers.',
@@ -102,14 +102,7 @@ export const Data = {
         'The template designed in aegean and sky blue shades looks light and neat. Due to its simple clean design it can be used for various stores: accessories, clothing, fashion, jewelry, sport, wedding. Your store will look perfect on any device due to responsive full-width design. Built-in tools such as flyout menus and product carousel enhance navigation and make presentation of your products more attractive for your store visitors. It’s SEO friendly and optimized for all popular browsers.',
       categorie: 'Fitness',
       versions: '5.4',
-      Customers: [
-        {
-          Name: '',
-          Rating: '',
-          Date: '',
-          Message: '',
-        },
-      ],
+      Customers: [],
     },
     {
       img: 'https://market.x-cart.com/var/images/template_images/286.418/Template_43_Alternative_Clothes.jpg',
@@ -142,14 +135,6 @@ export const Data = {
         "This stylish theme with tender pink accents has been developed for Fashion, Clothes, Jewelry and Design stores. The template is SEO friendly, compatible with all popular browsers and mobile ready, it will look great on any screen. Big full-width banner in the top and additional banners in the bottom will grab your store visitors attention to your promotions and offers. Products on sale, featured products, new arrivals and bestsellers are beautifully presented in built-in carousels. The template comes with dropdown categories menu, one of the category featured products is displayed in this drop-down next to subcategories list. Products in minicart widget are shown in blocks with product name, price and image, and customers can remove products right from there which makes cart management more convenient for them. With adapted news on the homepage you can be confident that all your latest records won't go unnoticed.",
       categorie: 'Apparel & Clothing',
       versions: '4.5 - 4.9',
-      Customers: [
-        {
-          Name: '',
-          Rating: '',
-          Date: '',
-          Message: '',
-        },
-      ],
     },
     {
       img: 'https://market.x-cart.com/var/images/template_images/286.418/Template_48_Graphic_Stock_1.jpg',
