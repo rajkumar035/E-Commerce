@@ -33,15 +33,18 @@ function App() {
                 selectedcategory(event.target.value);
               }}
               data={Data.Contents.filter((vals) => {
+                if (search === '' && version === '' && category === '') {
+                  return vals;
+                }
                 if (search !== '') {
                   console.log(vals.categorie);
                   return search.includes(vals.head.toLowerCase());
-                } else if (vals.versions.includes(version)) {
+                }
+                if (vals.versions.includes(version)) {
                   return version.includes(vals.versions);
-                } else if (vals.categorie.includes(category)) {
+                }
+                if (vals.categorie.includes(category)) {
                   return category.includes(vals.categorie);
-                } else {
-                  console.log('Oops...!');
                 }
               })}
             />
@@ -49,7 +52,7 @@ function App() {
         />
         <Route path='/Products' element={<ProductDef />} />
       </Routes>
-      <Contacts/>
+      <Contacts />
     </div>
   );
 }
