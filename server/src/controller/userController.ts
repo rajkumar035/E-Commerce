@@ -76,7 +76,6 @@ export default class UserControl {
   static async getUserByRole(req: Request, res: Response) {
     const { user_role } = req.params;
     if (user_role === "CONSUMER" || user_role === "PROVIDER") {
-      console.log(user_role);
       const userData = await UserServices.getUserByRole(user_role);
       if (userData.length > 0) {
         res.status(200).json(userData);
