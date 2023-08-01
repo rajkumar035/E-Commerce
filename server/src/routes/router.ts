@@ -4,7 +4,7 @@ import StorageController from "../controller/storageController";
 
 const router = express.Router({ caseSensitive: true });
 
-// Consumer Api's
+// Users Api's
 router.post("/createuser", ConsumerControl.createUser);
 router.get("/getusers", ConsumerControl.getAllUser);
 router.get("/getuser/:id", ConsumerControl.getUserById);

@@ -7,7 +7,7 @@ const warehouse_model: Schema = new Schema<IStorage>(
     item_type: { type: String, required: true },
     item_name: { type: String, required: true },
     quantity: { type: String, required: true },
-    units_in_measure: { type: String, required: true }, //"Mg" | "Kg" | "Ml" | "L" | "Nos";
+    units_in_measure: { type: String, required: true },
     price_per_unit: { type: String, required: true },
   },
   { versionKey: false, timestamps: true, timeseries: { timeField: "updatedAt", metaField: "quantity", granularity: "price_per_unit" } }
