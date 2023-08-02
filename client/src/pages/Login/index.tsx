@@ -33,7 +33,7 @@ const Login = () => {
             }}
           >
             <label htmlFor="getOtp">OTP</label>
-            <input type="number" id="getOtp" name="getOtp" placeholder="Mobile Number" className="form-control" required />
+            <input type="number" id="getOtp" maxLength={5} name="getOtp" placeholder="Mobile Number" className="form-control" required />
             <button type="submit" className="btn btn-small btn-dark w-100">
               Get OTP
             </button>

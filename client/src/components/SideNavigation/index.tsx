@@ -85,7 +85,7 @@ const SideNavigation: React.FunctionComponent<IReactNode> = ({ children }) => {
   };
 
   return (
-    <Box component={"div"} className="d-flex">
+    <Box display={"flex"}>
       <Drawer variant="permanent" open={open} className={classes.mainDrawer}>
         <Box component={"div"} className={`${open ? "d-flex justify-content-end" : "text-center"}`}>
           <IconButton className="pt-4 px-4 pb-0" onClick={handleDrawer}>
@@ -111,7 +111,9 @@ const SideNavigation: React.FunctionComponent<IReactNode> = ({ children }) => {
           </ListItem>
         </List>
       </Drawer>
-      <Box component="main">{children}</Box>
+      <Box component="main" className="px-5" minHeight={"100vh"} maxHeight={"max-content"} flexGrow={1}>
+        {children}
+      </Box>
     </Box>
   );
 };
