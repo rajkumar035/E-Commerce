@@ -65,4 +65,39 @@ export default class StorageServices {
     ]);
     return getStorageData;
   }
+
+  static async getStorageByItemName(userId: string, itemName: string) {
+    const getStorageByItemName = await storageModel.aggregate([
+      { $match: { user_id: `${userId}` } },
+      {
+        $group: {
+          _id: {
+            user_id: "$user_id",
+            item_type: "$item_type",
+          },
+          WareHouse: {
+            $push: {
+              _id: "$_id",
+              items_name: "$item_name",
+              quanity: "$quantity",
+              units_in_measure: "$units_in_measure",
+              price_per_unit: "$price_per_unit",
+              created_at: "$createdAt",
+              last_update: "$updatedAt",
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          user_id: "$_id.user_id",
+          item_type: "$_id.item_type",
+          warehouse: "$WareHouse",
+          _id: 0,
+        },
+      },
+      { $match: { item_type: `${itemName}` } },
+    ]);
+    return getStorageByItemName;
+  }
 }

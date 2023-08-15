@@ -86,4 +86,23 @@ export default class StorageController {
       res.status(500).json({ Message: err });
     }
   }
+
+  static async getStorageByItemName(req: Request, res: Response) {
+    const { item_name, user_id } = req.params;
+    try {
+      const hasUser = await ConsumerServices.getUserById(user_id);
+      if (hasUser?.id) {
+        const storageByItemName = await StorageServices.getStorageByItemName(user_id, item_name);
+        if (storageByItemName.length > 0) {
+          res.status(200).json(storageByItemName[0]);
+        } else {
+          res.status(200).json({ Message: "User has no storage data" });
+        }
+      } else {
+        res.status(400).json({ Message: "There is no registered used in the given ID" });
+      }
+    } catch (err) {
+      res.status(500).json({ Message: err });
+    }
+  }
 }

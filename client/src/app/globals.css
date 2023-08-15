@@ -1,8 +1,27 @@
 body {
-  height: 100vh;
   scroll-behavior: smooth;
+  height: 100vh;
+  font-family: "Poppins", sans-serif !important;
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+input,
+select {
+  border: 1.4px solid rgba(0, 0, 0, 0.2);
+  padding: 5px 8px;
+  border-radius: 6px;
+  width: 100%;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+}
+
+input:disabled,
+select:disabled {
+  background: rgba(0, 0, 0, 0.1);
 }

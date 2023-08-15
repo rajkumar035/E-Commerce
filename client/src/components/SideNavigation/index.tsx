@@ -8,7 +8,6 @@ import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import IconButton from "@mui/material/IconButton";
-import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -18,7 +17,7 @@ import { faAngleDoubleLeft } from "@fortawesome/free-solid-svg-icons/faAngleDoub
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons/faAngleDoubleRight";
 import { faWarehouse } from "@fortawesome/free-solid-svg-icons/faWarehouse";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping";
-import { useParams } from "next/navigation";
+import Link from "next/link";
 
 const drawerWidth = 240;
 
@@ -76,9 +75,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
 const SideNavigation: React.FunctionComponent<IReactNode> = ({ children }) => {
   const classes = useStyles();
 
-  const url = useParams();
-  console.log(url);
-
   const [open, setOpen] = React.useState(true);
   const handleDrawer = () => {
     setOpen(!open);
@@ -93,22 +89,22 @@ const SideNavigation: React.FunctionComponent<IReactNode> = ({ children }) => {
           </IconButton>
         </Box>
         <List sx={{ background: "rgba(21, 59, 68, 1)" }} className="mt-3">
-          <ListItem key={2} className="m-0 p-0">
-            <ListItemButton className="p-3 px-4" href="/Cart">
+          <Link className="m-0 p-0 text-decoration-none" href="/Cart">
+            <ListItemButton className="p-3 px-4">
               <ListItemIcon>
                 <FontAwesomeIcon icon={faCartShopping} fontSize={"20px"} color="rgba(255, 255, 255, 0.8)" />
               </ListItemIcon>
               <ListItemText className={classes.tabText}>Cart</ListItemText>
             </ListItemButton>
-          </ListItem>
-          <ListItem key={1} className="m-0 p-0">
-            <ListItemButton className="p-3 px-4" href="/Storage">
+          </Link>
+          <Link className="m-0 p-0 text-decoration-none" href="/Storage">
+            <ListItemButton className="p-3 px-4">
               <ListItemIcon>
                 <FontAwesomeIcon icon={faWarehouse} fontSize={"20px"} color="rgba(255, 255, 255, 0.8)" />
               </ListItemIcon>
               <ListItemText className={classes.tabText}>Storage</ListItemText>
             </ListItemButton>
-          </ListItem>
+          </Link>
         </List>
       </Drawer>
       <Box component="main" className="px-5" minHeight={"100vh"} maxHeight={"max-content"} flexGrow={1}>

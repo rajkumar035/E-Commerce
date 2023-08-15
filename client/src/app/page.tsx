@@ -3,7 +3,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import Link from "next/link";
 
-const RootPage = () => {
+const RootPage: React.FunctionComponent = () => {
   return (
     <div className="d-flex justify-content-center text-center align-items-middle w-100 h-100">
       <div className="m-auto">

@@ -21,11 +21,11 @@ const RootLayout: React.FunctionComponent<IReactNode> = ({ children }) => {
   return (
     <section className={inter.className}>
       <CacheProvider value={cache}>
-        <React.Suspense>
-          <SideNavigation>
+        <SideNavigation>
+          <React.Suspense fallback={<h6>Loading....</h6>}>
             <div className="pt-4">{children}</div>
-          </SideNavigation>
-        </React.Suspense>
+          </React.Suspense>
+        </SideNavigation>
       </CacheProvider>
     </section>
   );

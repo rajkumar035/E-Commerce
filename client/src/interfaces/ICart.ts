@@ -1,8 +1,7 @@
 interface IProductSummary {
   productName: string;
-  quantity: string;
-  marketPrice: string;
-  totalBuyed: string;
+  quantity: number;
+  price: number;
 }
 
 export type { IProductSummary };

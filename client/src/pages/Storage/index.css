@@ -1,0 +1,52 @@
+:root {
+  --dark: rgba(0, 0, 0, 1);
+  --error: rgba(235, 40, 40, 1);
+}
+
+.font-black-38-bolder {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: 0.04em;
+}
+
+.font-black-30-bolder {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: 0.02em;
+}
+
+.font-black-14-bold {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--dark);
+}
+
+.font-black-22-bold {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--dark);
+}
+
+.form-error {
+  font-size: 12px;
+  color: var(--error);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.storage-items-car-bg {
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+}
+
+.app-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
