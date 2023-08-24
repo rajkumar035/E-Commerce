@@ -17,7 +17,12 @@ import { faAngleDoubleLeft } from "@fortawesome/free-solid-svg-icons/faAngleDoub
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons/faAngleDoubleRight";
 import { faWarehouse } from "@fortawesome/free-solid-svg-icons/faWarehouse";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons/faArrowRightFromBracket";
 import Link from "next/link";
+import { clearLocalStorageItem } from "@/helpers/localstorage";
+import { useRouter } from "next/router";
+import { getLocalStorageItem } from "@/helpers/localstorage";
+import { LOCALUSER } from "@/helpers/constants";
 
 const drawerWidth = 240;
 
@@ -74,6 +79,27 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
 
 const SideNavigation: React.FunctionComponent<IReactNode> = ({ children }) => {
   const classes = useStyles();
+  /*
+   *
+   *
+   * For Auth Checking
+   *
+   *
+   * */
+  const router = useRouter();
+  const [updateRoute, setUpdateRoute] = React.useState<number>(0);
+
+  React.useEffect(() => {
+    if (typeof window !== undefined) {
+      const getAuth = getLocalStorageItem(LOCALUSER);
+      if (getAuth === null || getAuth === "") {
+        router.push({ pathname: "/" });
+      }
+      setUpdateRoute(0);
+    } else {
+      router.push({ pathname: "/" });
+    }
+  }, [updateRoute]);
 
   const [open, setOpen] = React.useState(true);
   const handleDrawer = () => {
@@ -81,36 +107,49 @@ const SideNavigation: React.FunctionComponent<IReactNode> = ({ children }) => {
   };
 
   return (
-    <Box display={"flex"}>
-      <Drawer variant="permanent" open={open} className={classes.mainDrawer}>
-        <Box component={"div"} className={`${open ? "d-flex justify-content-end" : "text-center"}`}>
-          <IconButton className="pt-4 px-4 pb-0" onClick={handleDrawer}>
-            {open ? <FontAwesomeIcon icon={faAngleDoubleLeft} fontSize={"20px"} color="rgba(255, 255, 255, 0.8)" /> : <FontAwesomeIcon icon={faAngleDoubleRight} fontSize={"20px"} color="rgba(255, 255, 255, 0.8)" />}
-          </IconButton>
+    <>
+      <Box display={"flex"}>
+        <Drawer variant="permanent" open={open} className={classes.mainDrawer}>
+          <Box component={"div"} className={`${open ? "d-flex justify-content-end" : "text-center"}`}>
+            <IconButton className="pt-4 px-4 pb-0" onClick={handleDrawer}>
+              {open ? <FontAwesomeIcon icon={faAngleDoubleLeft} fontSize={"20px"} color="rgba(255, 255, 255, 0.8)" /> : <FontAwesomeIcon icon={faAngleDoubleRight} fontSize={"20px"} color="rgba(255, 255, 255, 0.8)" />}
+            </IconButton>
+          </Box>
+          <List sx={{ background: "rgba(21, 59, 68, 1)" }} className="mt-3">
+            <Link className="m-0 p-0 text-decoration-none" href="/Cart">
+              <ListItemButton className="p-3 px-4">
+                <ListItemIcon>
+                  <FontAwesomeIcon icon={faCartShopping} fontSize={"20px"} color="rgba(255, 255, 255, 0.8)" />
+                </ListItemIcon>
+                <ListItemText className={classes.tabText}>Cart</ListItemText>
+              </ListItemButton>
+            </Link>
+            <Link className="m-0 p-0 text-decoration-none" href="/Storage">
+              <ListItemButton className="p-3 px-4">
+                <ListItemIcon>
+                  <FontAwesomeIcon icon={faWarehouse} fontSize={"20px"} color="rgba(255, 255, 255, 0.8)" />
+                </ListItemIcon>
+                <ListItemText className={classes.tabText}>Storage</ListItemText>
+              </ListItemButton>
+            </Link>
+          </List>
+        </Drawer>
+        <Box component="main" className="px-5" minHeight={"100vh"} maxHeight={"max-content"} flexGrow={1}>
+          <div className="d-flex justify-content-end mx-1 mt-3 mb-0">
+            <FontAwesomeIcon
+              icon={faArrowRightFromBracket}
+              className="border border-2 shadow-sm rounded-circle p-3"
+              role="button"
+              onClick={() => {
+                clearLocalStorageItem();
+                setUpdateRoute(updateRoute + 1);
+              }}
+            />
+          </div>
+          {children}
         </Box>
-        <List sx={{ background: "rgba(21, 59, 68, 1)" }} className="mt-3">
-          <Link className="m-0 p-0 text-decoration-none" href="/Cart">
-            <ListItemButton className="p-3 px-4">
-              <ListItemIcon>
-                <FontAwesomeIcon icon={faCartShopping} fontSize={"20px"} color="rgba(255, 255, 255, 0.8)" />
-              </ListItemIcon>
-              <ListItemText className={classes.tabText}>Cart</ListItemText>
-            </ListItemButton>
-          </Link>
-          <Link className="m-0 p-0 text-decoration-none" href="/Storage">
-            <ListItemButton className="p-3 px-4">
-              <ListItemIcon>
-                <FontAwesomeIcon icon={faWarehouse} fontSize={"20px"} color="rgba(255, 255, 255, 0.8)" />
-              </ListItemIcon>
-              <ListItemText className={classes.tabText}>Storage</ListItemText>
-            </ListItemButton>
-          </Link>
-        </List>
-      </Drawer>
-      <Box component="main" className="px-5" minHeight={"100vh"} maxHeight={"max-content"} flexGrow={1}>
-        {children}
       </Box>
-    </Box>
+    </>
   );
 };
 

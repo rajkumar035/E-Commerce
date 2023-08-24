@@ -1,6 +1,7 @@
 import { Document } from "mongoose";
 
 export interface IStorageRoot {
+  item_img: String;
   item_type: String;
   user_id: String;
   item_name: String;
@@ -10,6 +11,7 @@ export interface IStorageRoot {
 }
 
 export interface IStorage extends Document {
+  item_img: String;
   item_type: String;
   user_id: String;
   item_name: String;

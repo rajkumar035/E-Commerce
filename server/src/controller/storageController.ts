@@ -10,7 +10,7 @@ export default class StorageController {
     });
     const isDataExist = await StorageServices.getStorageByUserIdItemTypeItemName(req.body.user_id, req.body.item_type, req.body.item_name);
     try {
-      if (bodyKeys.length === 6 && !hasKeys && isDataExist.length === 0) {
+      if (bodyKeys.length === 7 && !hasKeys && isDataExist.length === 0) {
         const isStorageCreated = await StorageServices.createStorage(req.body);
         if (isStorageCreated === null) {
           res.status(400).json({ Message: "Storage is not saved" });
@@ -103,6 +103,33 @@ export default class StorageController {
       }
     } catch (err) {
       res.status(500).json({ Message: err });
+    }
+  }
+
+  static async getRawStorage(req: Request, res: Response) {
+    const { user_id } = req.params;
+    try {
+      const hasUser = await ConsumerServices.getUserById(user_id);
+      if (hasUser?.id) {
+        const rawStorages = await StorageServices.getRawStorageByUserId(user_id);
+        res.status(200).json(rawStorages);
+      } else {
+        res.status(400).json({ Message: "There is no user on the given ID" });
+      }
+    } catch (err) {
+      res.status(500).json({
+        Message: err,
+      });
+    }
+  }
+
+  static async getStorageById(req: Request, res: Response) {
+    const { storage_id } = req.params;
+    try {
+      const storageData = await StorageServices.getStorageById(storage_id);
+      res.status(200).json(storageData);
+    } catch (err) {
+      res.status(400).json({ Message: err });
     }
   }
 }

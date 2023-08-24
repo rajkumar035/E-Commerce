@@ -24,7 +24,11 @@ export default class UserServices {
   }
 
   static async getUserByPhone(phone: String) {
-    const userData: Document<IUser> | null = await userModel.findOne({ owner_mobile: phone });
+    const userData = await userModel.aggregate([
+      {
+        $match: { owner_mobile: phone },
+      },
+    ]);
     return userData;
   }
 
@@ -36,5 +40,14 @@ export default class UserServices {
   static async updateUser(body: IUser, id: string) {
     const updatedData = await userModel.findByIdAndUpdate(id, body);
     return updatedData;
+  }
+
+  static async getUserByNumber(phoneNumber: string, role: "CONSUMER" | "PROVIDER") {
+    const getUsers = await userModel.aggregate([
+      {
+        $match: { owner_mobile: phoneNumber, role: role },
+      },
+    ]);
+    return getUsers;
   }
 }

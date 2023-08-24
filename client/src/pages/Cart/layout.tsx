@@ -2,10 +2,9 @@
 
 import React from "react";
 import { IReactNode } from "@/interfaces/ICommon";
-import { CacheProvider, EmotionCache } from "@emotion/react";
-import CreateCache from "@/helpers/emotionCache";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import MuiCacheProvider from "@/providers/muiCacheProvider";
 
 const inter = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
@@ -17,16 +16,15 @@ export const metadata: Metadata = {
 };
 
 const RootLayout: React.FunctionComponent<IReactNode> = ({ children }) => {
-  const cache: EmotionCache = CreateCache();
   return (
     <section className={inter.className}>
-      <CacheProvider value={cache}>
+      <MuiCacheProvider>
         <SideNavigation>
           <React.Suspense fallback={<h6>Loading....</h6>}>
             <div className="pt-4">{children}</div>
           </React.Suspense>
         </SideNavigation>
-      </CacheProvider>
+      </MuiCacheProvider>
     </section>
   );
 };

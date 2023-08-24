@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 import Grid from "@mui/material/Grid";
-import { IGetStorageData, IGetStorageWareHouseData } from "@/interfaces/IStorage";
+import { ICreateStorage, IGetStorageData, IGetStorageWareHouseData } from "@/interfaces/IStorage";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Table from "@mui/material/Table";
@@ -18,7 +18,7 @@ import { IHookFormValidation } from "@/interfaces/ICommon";
 import { useRouter } from "next/router";
 import StyledTableRow from "@/components/TableRow";
 import { LOCALUSER, Measures } from "@/helpers/constants";
-import { getStorageByIdandItemName } from "@/services/api";
+import { createStorageById, getStorageByIdandItemName } from "@/services/api";
 import { getLocalStorageItem } from "@/helpers/localstorage";
 import { AxiosResponse } from "axios";
 
@@ -49,6 +49,12 @@ const SubStorageItems: React.FunctionComponent = () => {
   // State for filter text
   const [filterText, setFilterText] = useState<string | null>(null);
 
+  // userid from storage
+  const [userId, setUserId] = useState<string>("");
+
+  // For refetching data on data posting
+  const [refetchData, setRefetchData] = useState<number>(0);
+
   //maintaining main data in state
   const [subItems, setSubItems] = useState<IGetStorageData>();
 
@@ -62,18 +68,12 @@ const SubStorageItems: React.FunctionComponent = () => {
     setFilterText(e.target.value);
   };
 
-  // Form submission of create sub items
-  const handleCreateSubItem: (data: IHookFormValidation) => void = (data: IHookFormValidation) => {
-    console.log(data);
-    reset();
-    handleCreateModal();
-  };
-
   // Fetching Storage data by Userid and itemname
   useEffect(() => {
     try {
       const id: string | null = getLocalStorageItem(LOCALUSER);
       if (id && itemName) {
+        setUserId(id);
         getStorageByIdandItemName(id, itemName as string)
           .then((res: AxiosResponse<IGetStorageData>) => {
             setSubItems(res.data);
@@ -85,7 +85,35 @@ const SubStorageItems: React.FunctionComponent = () => {
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [refetchData]);
+
+  // Form submission of create sub items
+  const handleCreateSubItem: (data: IHookFormValidation) => void = (data: IHookFormValidation) => {
+    if (subItems) {
+      const { subItem, price, measurer, quantity } = data;
+      const createStoragePayload: ICreateStorage = {
+        item_img: `${subItems.item_img}`,
+        user_id: userId,
+        item_type: `${subItems.item_type}`,
+        item_name: subItem,
+        quantity: quantity,
+        units_in_measure: measurer,
+        price_per_unit: price,
+      };
+      createStorageById(createStoragePayload)
+        .then((res) => {
+          if (res.status === 200) {
+            setRefetchData(refetchData + 1);
+            reset();
+            handleCreateModal();
+          }
+          alert(`${res.data.Message}`);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
 
   return (
     <Layout>
@@ -106,11 +134,15 @@ const SubStorageItems: React.FunctionComponent = () => {
               {errors["subItem"] && <p className="form-error">{errors["subItem"].message}</p>}
             </div>
             <div className="w-100 my-3">
-              <input className="form-control my-1" placeholder="price" type="number" {...register("price", { required: "SubItem is required" })} />
+              <input className="form-control my-1" placeholder="price" type="number" {...register("price", { required: "Price is required" })} />
               {errors["price"] && <p className="form-error">{errors["price"].message}</p>}
             </div>
             <div className="w-100 my-3">
-              <select className="form-select my-1" defaultValue={"null"} {...register("measurer", { required: "SubItem is required" })}>
+              <input className="form-control my-1" placeholder="quantity" type="number" {...register("quantity", { required: "Quantity is required" })} />
+              {errors["quantity"] && <p className="form-error">{errors["quantity"].message}</p>}
+            </div>
+            <div className="w-100 my-3">
+              <select className="form-select my-1" defaultValue={"null"} {...register("measurer", { required: "Measurer is required" })}>
                 <optgroup>
                   <option value={"null"} disabled>
                     Select the Measurer
@@ -126,7 +158,17 @@ const SubStorageItems: React.FunctionComponent = () => {
               </select>
               {errors["measurer"] && <p className="form-error">{errors["measurer"].message}</p>}
             </div>
-            <button className="btn btn-medium btn-dark w-100">Create</button>
+            <div className={`d-flex ${isMobileScreen ? "flex-wrap" : "flex-nowrap"} gap-3 w-100`}>
+              <button
+                className="btn btn-medium btn-outline-dark w-100"
+                onClick={() => {
+                  handleCreateModal();
+                }}
+              >
+                Cancel
+              </button>
+              <button className="btn btn-medium btn-dark w-100">Create</button>
+            </div>
           </form>
         </Box>
       </Modal>

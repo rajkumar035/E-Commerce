@@ -2,11 +2,9 @@
 
 import React from "react";
 import { IReactNode } from "@/interfaces/ICommon";
-import { EmotionCache } from "@emotion/cache";
-import createEmotionCache from "@/helpers/emotionCache";
 import { Poppins } from "next/font/google";
 import { Metadata } from "next";
-import { CacheProvider } from "@emotion/react";
+import MuiCacheProvider from "@/providers/muiCacheProvider";
 
 const inter = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
@@ -18,18 +16,15 @@ export const metadata: Metadata = {
 };
 
 const RootLayout: React.FunctionComponent<IReactNode> = ({ children }) => {
-  // For Caching MUI CSS when reloads
-  const cache: EmotionCache = createEmotionCache();
-
   return (
     <section className={inter.className}>
-      <CacheProvider value={cache}>
+      <MuiCacheProvider>
         <SideNavigation>
           <React.Suspense fallback={<h6>Loading...</h6>}>
             <div className="pt-4">{children}</div>
           </React.Suspense>
         </SideNavigation>
-      </CacheProvider>
+      </MuiCacheProvider>
     </section>
   );
 };

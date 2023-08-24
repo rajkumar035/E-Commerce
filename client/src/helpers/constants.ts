@@ -1,6 +1,6 @@
-const BACKENDURL = "http://localhost:2100";
+const BACKENDURL: string = "http://localhost:2100";
 
-const LOCALUSER = "intro";
+const LOCALUSER: string = "intro";
 
 const REGEX = {
   MOBILE: /^(\+\d{1,3}[- ]?)?\d{10}$/,
@@ -15,6 +15,6 @@ const REGEX = {
   EMAIL: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
 };
 
-const Measures = ["Kg", "Mg", "Nos", "L", "Ml"];
+const Measures: Array<string> = ["Kg", "Mg", "Nos", "L", "Ml"];
 
 export { REGEX, Measures, BACKENDURL, LOCALUSER };

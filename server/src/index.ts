@@ -11,7 +11,7 @@ const routerConnect = () => {
 
   dotenv.config();
   App.use(cors());
-  App.use(express.json());
+  App.use(express.json({ limit: "20mb" }));
   App.use(express.urlencoded({ extended: true }));
   App.use("/api", router);
 

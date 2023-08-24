@@ -21,11 +21,17 @@ router.get("/getuser/:id", ConsumerControl.getUserById);
 router.get("/getuserbyrole/:user_role", ConsumerControl.getUserByRole);
 router.patch("/updateuser/:id", ConsumerControl.updateUser);
 
+// Login API's
+router.post("/login", ConsumerControl.loginByOtp);
+router.post("/verifyOtp", ConsumerControl.verifyOtpRole);
+
 // Storage Api's
 router.post("/createwarehouse", StorageController.createStorage);
 router.patch("/updatewarehouse/:ware_house_id", StorageController.updateStorage);
 router.delete("/deletewarehouse/:ware_house_id", StorageController.deleteStorage);
 router.get("/getwarehousebyuser/:user_id", StorageController.getStorageByUserId);
 router.get("/getwarehousebyuser/:item_name/:user_id", StorageController.getStorageByItemName);
+router.get("/getallstorage/:user_id", StorageController.getRawStorage);
+router.get("/getStorageById/:storage_id", StorageController.getStorageById);
 
 export = router;

@@ -3,6 +3,7 @@ import { IStorage } from "../interfaces/storage";
 
 const warehouse_model: Schema = new Schema<IStorage>(
   {
+    item_img: { type: String, required: true },
     user_id: { type: String, required: true },
     item_type: { type: String, required: true },
     item_name: { type: String, required: true },

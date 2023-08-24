@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Grid from "@mui/material/Grid";
 import Switch from "@mui/material/Switch";
@@ -12,10 +12,14 @@ import { styled } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { IProductSummary } from "@/interfaces/ICart";
 import StyledTableRow from "@/components/TableRow";
 import { useForm } from "react-hook-form";
 import { IHookFormValidation } from "@/interfaces/ICommon";
+import { getRawStorageByUserId, getStorageById } from "@/services/api";
+import { getLocalStorageItem } from "@/helpers/localstorage";
+import { LOCALUSER } from "@/helpers/constants";
+import { AxiosResponse } from "axios";
+import { IGetRawStorage } from "@/interfaces/IStorage";
 import "@/app/globals.css";
 
 const Layout = React.lazy(() => import("@/pages/Cart/layout"));
@@ -84,33 +88,16 @@ const Cart: React.FunctionComponent = () => {
   const [editRow, setEditRow] = useState<number | null>(null);
 
   // state for handling itemname in add cart form
-  const [itemName, setItemName] = useState<string>("NULL");
-
-  // state for edit table data selection
-  const [editRowData, setEditRowData] = useState<IProductSummary>({
-    price: 0,
-    productName: "",
-    quantity: 0,
-  });
+  const [selectedItem, setSelectedItem] = useState<IGetRawStorage | null>(null);
 
   // state for maintaining the datas in summary table
-  const [summary, setSummary] = useState<Array<IProductSummary>>([
-    {
-      productName: "Tomato",
-      quantity: 1,
-      price: 140,
-    },
-    {
-      productName: "Onion",
-      quantity: 2,
-      price: 240,
-    },
-    {
-      productName: "Apple",
-      quantity: 1,
-      price: 120,
-    },
-  ]);
+  const [summary, setSummary] = useState<Array<IGetRawStorage>>([]);
+
+  // Storage available stocks
+  const [storageDatas, setStorageDatas] = useState<Array<IGetRawStorage>>();
+
+  // Quantity Selection
+  const [selectedQuantity, setSelectedQuantity] = useState<string>("");
 
   // barcode feature enable and disable function
   const handleBarCodeToggle: () => void = () => {
@@ -118,31 +105,74 @@ const Cart: React.FunctionComponent = () => {
   };
 
   // Saving the select field value in the state
-  const handleItemName: (value: string) => void = (value: string) => {
-    setItemName(value);
+  const handleItemName: (value: string) => void = async (value: string) => {
+    await getStorageById(value)
+      .then((res: AxiosResponse<IGetRawStorage>) => {
+        setSelectedItem(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   // To enable edit feature and data of the selected row in summary table
-  const handleEditSummaryProducts: (index: number | null, data?: IProductSummary) => void = (index: number | null, data?: IProductSummary) => {
+  const handleEditSummaryProducts: (index: number, data: IGetRawStorage) => void = (index: number, data: IGetRawStorage) => {
     setEditRow(index);
-    if (data) {
-      setEditRowData({
-        price: data.price,
-        productName: data.productName,
-        quantity: data.quantity,
-      });
-    }
+    setSelectedItem(data);
+    setSelectedQuantity(`${data.quantity}`);
   };
 
-  // Saving the data from the add cart form
+  // Saving the data from the add cart form (create/edit)
   const handleItemsAdd: (data: IHookFormValidation) => void = (data: IHookFormValidation) => {
-    console.log(data);
+    const { itemQuantity } = data;
+    if (selectedItem) {
+      const mainData: IGetRawStorage = { ...selectedItem, quantity: parseInt(itemQuantity) };
+      if (editRow === null) {
+        setSummary((prev) => [...prev, mainData]);
+      } else {
+        const tempArray: Array<IGetRawStorage> = summary;
+        tempArray[editRow - 1] = mainData;
+        setSummary(tempArray);
+        setEditRow(null);
+      }
+    }
+    setSelectedItem(null);
+    setSelectedQuantity("");
     reset();
   };
 
+  //For delete the saved products in the table
+  const handleDeleteSummaryIndex: (index: number) => void = (index: number) => {
+    const tempArray: Array<IGetRawStorage> = summary;
+    tempArray.splice(index, 1);
+    setSummary(tempArray);
+  };
+
+  // Fetching the Storage Data
+  useEffect(() => {
+    try {
+      const userId: string | null = getLocalStorageItem(LOCALUSER);
+      if (userId) {
+        getRawStorageByUserId(userId)
+          .then((res: AxiosResponse<Array<IGetRawStorage>>) => {
+            if (res.status === 200) {
+              setStorageDatas(res.data);
+            } else {
+              console.error("No User");
+            }
+          })
+          .catch((err) => {
+            return err;
+          });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   return (
     <Layout>
-      <h3 className="text-dark my-4 fw-bold">Cart</h3>
+      <h3 className="text-dark mb-4 mt-0 fw-bold">Cart</h3>
       {/*
        *
        *
@@ -199,31 +229,50 @@ const Cart: React.FunctionComponent = () => {
           <Grid item={true} lg={4} md={12} sm={12}>
             <select
               id="itemName"
-              disabled={barToggle}
-              value={editRow !== null ? editRowData.productName : itemName}
+              disabled={barToggle || editRow !== null}
+              value={selectedItem ? selectedItem._id : "NULL"}
               className={errors["itemName"]?.message === "" ? "border border-danger border-2" : ""}
               {...register("itemName", {
-                required: true,
                 onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {
-                  let itemName: string = e.target.value;
-                  handleItemName(itemName);
+                  handleItemName(e.target.value);
                 },
+                required: editRow !== null ? false : true,
               })}
             >
               <optgroup>
                 <option disabled value={"NULL"}>
-                  Eg:Tomato
+                  {storageDatas && storageDatas.length > 0 ? "Eg:Tomato" : "No Stocks Avialable"}
                 </option>
-                <option value={"Dhal"}>Dhal</option>
-                <option value={"Onion"}>Onion</option>
+                {storageDatas &&
+                  storageDatas.length > 0 &&
+                  storageDatas.map((items: IGetRawStorage, index: number) => {
+                    return (
+                      <option key={index} value={items._id}>
+                        {`${items.item_name} - ${items.item_type}`}
+                      </option>
+                    );
+                  })}
               </optgroup>
             </select>
           </Grid>
           <Grid item={true} lg={3} md={12} sm={12}>
-            <input type="number" className={errors["itemQuantity"]?.message === "" ? "border border-danger border-2" : ""} placeholder="Eg: 1" defaultValue={editRow ? editRowData.quantity : ""} id="itemQuantity" disabled={barToggle} {...register("itemQuantity", { required: true })} />
+            <input
+              type="number"
+              className={errors["itemQuantity"]?.message === "" ? "border border-danger border-2" : ""}
+              placeholder="Eg: 1"
+              value={selectedQuantity}
+              id="itemQuantity"
+              disabled={barToggle || selectedItem === null}
+              {...register("itemQuantity", {
+                required: true,
+                onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                  setSelectedQuantity(`${e.target.value}`);
+                },
+              })}
+            />
           </Grid>
           <Grid item={true} lg={3} md={12} sm={12}>
-            <input type="number" disabled={barToggle} value={100} placeholder="Auto Generated" id="itemPrice" {...register("itemprice")} />
+            <input type="number" disabled={true} value={selectedItem ? selectedItem.price_per_unit : 0} placeholder="Auto Generated" id="itemPrice" />
           </Grid>
           <Grid item={true} lg={2} md={12} sm={12}>
             {editRow === null ? (
@@ -253,6 +302,7 @@ const Cart: React.FunctionComponent = () => {
               <td className="fs-6 fw-semibold text-white my-0 p-3">S.No</td>
               <td className="fs-6 fw-semibold text-white my-0 py-3">Product Name</td>
               <td className="fs-6 fw-semibold text-white my-0 py-3">Quantity</td>
+              <td className="fs-6 fw-semibold text-white my-0 py-3">Metrics</td>
               <td className="fs-6 fw-semibold text-white my-0 py-3">Actual Price / Metric</td>
               <td className="fs-6 fw-semibold text-white my-0 py-3">Total</td>
               <td className="fs-6 fw-semibold text-white my-0 py-3">Action</td>
@@ -260,15 +310,17 @@ const Cart: React.FunctionComponent = () => {
           </TableHead>
           {summary.length > 0 && (
             <TableBody>
-              {summary.map((items: IProductSummary, index: number) => {
+              {summary.map((items: IGetRawStorage, index: number) => {
+                console.log(items, "sdasd");
                 const editEnabled = index + 1 === editRow;
                 return (
                   <StyledTableRow key={index} className={`border border-secondary ${editEnabled ? "border-2" : "border-0"}`}>
                     <td className={`fs-6 fw-semibold my-0 p-3`}>{index + 1}</td>
-                    <td className={`fs-6 fw-semibold my-0 py-3`}>{items.productName}</td>
+                    <td className={`fs-6 fw-semibold my-0 py-3`}>{items.item_name}</td>
                     <td className={`fs-6 fw-semibold my-0 py-3`}>{items.quantity}</td>
-                    <td className={`fs-6 fw-semibold my-0 py-3`}>{items.price}</td>
-                    <td className={`fs-6 fw-semibold my-0 py-3`}>{items.quantity * items.price}</td>
+                    <td className={`fs-6 fw-semibold my-0 py-3`}>{items.units_in_measure}</td>
+                    <td className={`fs-6 fw-semibold my-0 py-3`}>{items.price_per_unit}</td>
+                    <td className={`fs-6 fw-semibold my-0 py-3`}>{items.quantity * items.price_per_unit}</td>
                     <td className="my-0 py-3">
                       <div className="d-flex gap-4">
                         {!editEnabled && (
@@ -282,7 +334,15 @@ const Cart: React.FunctionComponent = () => {
                             }}
                           />
                         )}
-                        <FontAwesomeIcon icon={faTrashCan} color="#cf6c5f" size={"1x"} role="button" />
+                        <FontAwesomeIcon
+                          icon={faTrashCan}
+                          color="#cf6c5f"
+                          size={"1x"}
+                          role="button"
+                          onClick={() => {
+                            handleDeleteSummaryIndex(index);
+                          }}
+                        />
                       </div>
                     </td>
                   </StyledTableRow>
@@ -292,7 +352,7 @@ const Cart: React.FunctionComponent = () => {
           )}
         </Table>
       </TableContainer>
-      <button className="btn btn-dark px-5 my-3">Pay: 140</button>
+      <button className="btn btn-dark px-5 my-3">Pay: 0</button>
     </Layout>
   );
 };

@@ -22,4 +22,5 @@ export interface IUser extends Document {
   state: String;
   district: String;
   age: String;
+  secret: String;
 }

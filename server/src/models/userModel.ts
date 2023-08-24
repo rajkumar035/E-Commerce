@@ -12,6 +12,7 @@ const user_model: Schema = new Schema<IUser>(
     owner_mobile: { type: String, required: true },
     owner_name: { type: String, required: true },
     state: { type: String, required: true },
+    secret: { type: String, required: true },
     role: { type: String, enum: ["CONSUMER", "PROVIDER"], default: "CONSUMER", require: true },
   },
   { versionKey: false, timestamps: true }

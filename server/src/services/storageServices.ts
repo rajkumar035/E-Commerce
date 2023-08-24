@@ -40,6 +40,7 @@ export default class StorageServices {
           _id: {
             user_id: "$user_id",
             item_type: "$item_type",
+            item_img: "$item_img",
           },
           WareHouse: {
             $push: {
@@ -58,12 +59,18 @@ export default class StorageServices {
         $project: {
           user_id: "$_id.user_id",
           item_type: "$_id.item_type",
+          item_img: "$_id.item_img",
           warehouse: "$WareHouse",
           _id: 0,
         },
       },
     ]);
     return getStorageData;
+  }
+
+  static async getRawStorageByUserId(userId: string) {
+    const getStorageById = await storageModel.aggregate([{ $match: { user_id: `${userId}` } }]);
+    return getStorageById;
   }
 
   static async getStorageByItemName(userId: string, itemName: string) {
@@ -74,6 +81,7 @@ export default class StorageServices {
           _id: {
             user_id: "$user_id",
             item_type: "$item_type",
+            item_img: "$item_img",
           },
           WareHouse: {
             $push: {
@@ -92,6 +100,7 @@ export default class StorageServices {
         $project: {
           user_id: "$_id.user_id",
           item_type: "$_id.item_type",
+          item_img: "$_id.item_img",
           warehouse: "$WareHouse",
           _id: 0,
         },
