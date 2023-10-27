@@ -22,5 +22,9 @@ export interface IUser extends Document {
   state: String;
   district: String;
   age: String;
+  refresh: string;
   secret: String;
+  status: "LOGGEDIN" | "LOGOUT";
+  usertype: "ADMIN" | "USER";
+  admin: string;
 }

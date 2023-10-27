@@ -1,4 +1,3 @@
-import { Document, isObjectIdOrHexString } from "mongoose";
 import { userModel } from "../models/userModel";
 import { IUser } from "../interfaces/user";
 
@@ -6,11 +5,7 @@ export default class UserServices {
   static async createUser(body: IUser) {
     const UserSchema = new userModel(body);
     const userData = await UserSchema.save();
-    if (userData.id) {
-      return userData.id;
-    } else {
-      return null;
-    }
+    return userData;
   }
 
   static async getAllUser() {
@@ -19,21 +14,17 @@ export default class UserServices {
   }
 
   static async getUserById(id: String) {
-    const userData: Document<IUser> | null = await userModel.findOne({ _id: id });
+    const userData = await userModel.findOne({ _id: id });
     return userData;
   }
 
   static async getUserByPhone(phone: String) {
-    const userData = await userModel.aggregate([
-      {
-        $match: { owner_mobile: phone },
-      },
-    ]);
+    const userData = await userModel.findOne({ owner_mobile: phone });
     return userData;
   }
 
   static async getUserByRole(user_role: String) {
-    const userData = await userModel.aggregate([{ $match: { role: `${user_role}` } }]);
+    const userData = await userModel.findOne({ role: user_role });
     return userData;
   }
 
@@ -42,12 +33,18 @@ export default class UserServices {
     return updatedData;
   }
 
+  static async updateUserLogStatus(id: string) {
+    const updatedData = await userModel.findByIdAndUpdate(id, { status: "LOGGEDIN" });
+    return updatedData;
+  }
+
+  static async getUserByStatus(user_id: string) {
+    const data = await userModel.findOne({ _id: user_id, status: "LOGGEDIN" });
+    return data;
+  }
+
   static async getUserByNumber(phoneNumber: string, role: "CONSUMER" | "PROVIDER") {
-    const getUsers = await userModel.aggregate([
-      {
-        $match: { owner_mobile: phoneNumber, role: role },
-      },
-    ]);
+    const getUsers = await userModel.findOne({ owner_mobile: phoneNumber, role: role });
     return getUsers;
   }
 }

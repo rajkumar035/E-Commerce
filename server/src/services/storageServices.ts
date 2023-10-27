@@ -5,11 +5,12 @@ export default class StorageServices {
   static async createStorage(body: IStorageRoot) {
     const StorageSchema = new storageModel(body);
     const storageData = await StorageSchema.save();
-    if (storageData.id) {
-      return storageData.id;
-    } else {
-      return null;
-    }
+    return storageData;
+  }
+
+  static async getAllStorage() {
+    const storage = await storageModel.find();
+    return storage;
   }
 
   static async updateStorage(body: IStorageRoot, id: string) {
@@ -28,7 +29,7 @@ export default class StorageServices {
   }
 
   static async getStorageByUserIdItemTypeItemName(userId: String, itemType: String, itemsName: String) {
-    const getStorageData = await storageModel.aggregate([{ $match: { user_id: `${userId}`, item_type: `${itemType}`, item_name: `${itemsName}` } }]);
+    const getStorageData = await storageModel.findOne({ user_id: `${userId}`, item_type: `${itemType}`, item_name: `${itemsName}` });
     return getStorageData;
   }
 
@@ -69,7 +70,7 @@ export default class StorageServices {
   }
 
   static async getRawStorageByUserId(userId: string) {
-    const getStorageById = await storageModel.aggregate([{ $match: { user_id: `${userId}` } }]);
+    const getStorageById = await storageModel.find({ user_id: userId });
     return getStorageById;
   }
 

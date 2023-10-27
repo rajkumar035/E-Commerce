@@ -13,7 +13,11 @@ const user_model: Schema = new Schema<IUser>(
     owner_name: { type: String, required: true },
     state: { type: String, required: true },
     secret: { type: String, required: true },
+    refresh: { type: String, required: true },
+    usertype: { type: String, enum: ["ADMIN", "USER"], required: true },
+    admin: { type: String },
     role: { type: String, enum: ["CONSUMER", "PROVIDER"], default: "CONSUMER", require: true },
+    status: { type: String, enum: ["LOGGEDIN", "LOGOUT"], default: "LOGOUT" },
   },
   { versionKey: false, timestamps: true }
 );
