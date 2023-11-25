@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import UserServices from "../services/userServices";
 import jwt_decode from "jwt-decode";
 
-export async function getUserById(userid: string) {
+async function getUserById(userid: string) {
   try {
     const isUserExist = await UserServices.getUserById(userid);
     return isUserExist;
@@ -11,7 +11,7 @@ export async function getUserById(userid: string) {
   }
 }
 
-export async function verifyStorageAuth(req: Request, res: Response, next: NextFunction) {
+async function tokenValidation(req: Request, res: Response) {
   const token = req.cookies.token;
   const user = req.cookies.cred;
   const userType = req.cookies.type;
@@ -48,13 +48,17 @@ export async function verifyStorageAuth(req: Request, res: Response, next: NextF
   if (userData?.usertype !== userType || userDatav2?.usertype !== userType) {
     return res.status(401).send("Unauthorized");
   }
+}
 
+export async function verifyStorageAuth(req: Request, res: Response, next: NextFunction) {
+  console.log(req.originalUrl, req.method, new Date().toUTCString());
+  await tokenValidation(req, res);
   return next();
 }
 
 export async function verifyAdminAuth(req: Request, res: Response, next: NextFunction) {
   // Basic Token Validation
-  await verifyStorageAuth(req, res, next);
+  await tokenValidation(req, res);
   const token = req.headers.authorization;
   const userType = req.cookies.type;
 

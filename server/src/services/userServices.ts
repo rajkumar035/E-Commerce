@@ -47,4 +47,9 @@ export default class UserServices {
     const getUsers = await userModel.findOne({ owner_mobile: phoneNumber, role: role });
     return getUsers;
   }
+
+  static async getUserByAdminId(id: string) {
+    const getUsers = await userModel.find({ admin: id });
+    return getUsers;
+  }
 }

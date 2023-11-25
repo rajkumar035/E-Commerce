@@ -145,3 +145,24 @@ export const DELETE_WAREHOUSE_BY_ID = gql`
     }
   }
 `;
+
+/**
+ * For Retrieving users under a admin
+ * @param {unique(string)} admin_id Id of the the admin user
+ */
+
+export const GET_USER_BY_ADMIN = gql`
+  query UsersByAdmin($admin_id: ID!) {
+    UsersByAdmin(admin_id: $admin_id) {
+      age
+      user_name
+      owner_mail
+      owner_mobile
+      status
+      usertype
+      _id
+      createdAt
+      updatedAt
+    }
+  }
+`;

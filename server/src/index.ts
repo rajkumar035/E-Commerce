@@ -47,7 +47,7 @@ const mongooseConnect = () => {
         });
     }
   } catch (err) {
-    console.log("DB is not Connected");
+    console.error("DB is not Connected");
   }
 };
 

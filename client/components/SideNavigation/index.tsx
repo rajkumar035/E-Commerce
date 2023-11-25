@@ -120,16 +120,14 @@ const SideNavigation: React.FunctionComponent<IReactNode> = ({ children }) => {
                 <ListItemText className={classes.tabText}>Storage</ListItemText>
               </ListItemButton>
             </Link>
-            {isAdmin && (
-              <Link className="m-0 p-0 text-decoration-none" href="/Workers">
-                <ListItemButton className="p-3 px-4">
-                  <ListItemIcon>
-                    <FontAwesomeIcon icon={faUserGear} fontSize={"20px"} color="rgba(255, 255, 255, 0.8)" />
-                  </ListItemIcon>
-                  <ListItemText className={classes.tabText}>Workers</ListItemText>
-                </ListItemButton>
-              </Link>
-            )}
+            <Link className="m-0 p-0 text-decoration-none" href="/Workers">
+              <ListItemButton className="p-3 px-4">
+                <ListItemIcon>
+                  <FontAwesomeIcon icon={faUserGear} fontSize={"20px"} color="rgba(255, 255, 255, 0.8)" />
+                </ListItemIcon>
+                <ListItemText className={classes.tabText}>Workers</ListItemText>
+              </ListItemButton>
+            </Link>
           </List>
         </Drawer>
         <Box component="main" className="px-5" minHeight={"100vh"} maxHeight={"max-content"} flexGrow={1}>
